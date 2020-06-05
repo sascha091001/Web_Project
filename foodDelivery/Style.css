@@ -1,0 +1,29 @@
+.row .col-sm-4{
+	border: 1px solid blue;
+}
+
+.row .col-sm-4:hover{
+	background-color: silver;
+}
+
+#but:hover{
+	color: white;
+	background-color: blue;
+}
+
+#finder:hover{
+	color: white;
+	background-color: blue;
+}
+
+body{
+	background-image: url(BG.jpg);
+}
+
+#amount{
+	width: 35px;
+}
+
+.footer{
+	background-color: white;
+}
