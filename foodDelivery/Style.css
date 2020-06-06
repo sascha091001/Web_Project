@@ -27,3 +27,8 @@ body{
 .footer{
 	background-color: white;
 }
+
+#Dishes{
+	max-height: 360px;
+	overflow-x: auto;
+}

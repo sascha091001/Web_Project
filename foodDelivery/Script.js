@@ -4,6 +4,8 @@ let TypeObject = document.getElementById('type');
 let finder = document.getElementById('finder');
 let Discount = document.getElementById('discount');
 
+let Choose_Rest; 
+
 console.log(Discount);
 
 let Res; //Наш список
@@ -95,21 +97,78 @@ function getRestaurants(){
 	}	
 }
 
-
-function getInfo(){
+function Chooser(){
+	//console.log(event.target.parentNode.parentNode.children[0]);
+	
+	let Name = event.target.parentNode.parentNode.children[0].innerText;
+	let Address = event.target.parentNode.parentNode.children[2].innerText;
+	let Price_Arr;
+	
+	for (let key in Res){
+		if (Res[key].address == Address && Res[key].name == Name){
+			Price_Arr = Res[key];
+		}
+	}
+	
+	console.log(Price_Arr);
+	let Prices = Object.values(Price_Arr); //Преобразование из объекта в массив
+	
+	console.log(Prices);
+	Prices.splice(0, 15);   //Оставляем только сет
+	console.log(Prices);
+	
+	//console.log(Name);
+	//console.log(Address);
+	
 	let obXhr = new XMLHttpRequest();
 	
 	obXhr.open('GET', 'RestInfo');
 	obXhr.send();
+	
+	let MenuBlock = document.getElementById('menu');
+	console.log(MenuBlock);
+	
+	MenuBlock.innerHTML = '';
 	
 	obXhr.onreadystatechange = function(){
 		if(obXhr.readyState != 4) return;
 
 		if(obXhr.response){
 			let result = JSON.parse(obXhr.response);
+			
 			console.log(result);
+	
+			for (let i in result){
+				let set = document.createElement('div');
+				set.className = "col-sm-4 col-12"
+			
+				set.innerHTML = `
+				
+					<p> <img src = "${result[i].url}" width = "100%"> </p>
+					<h5 class = "text-center text-danger"> ${result[i].name} </h5>
+					<p> Краткое описание: ${result[i].description} </p>	
+					<h4 class = "text-center"> ${Prices[i]} Рубля(лей) </h4>
+					<p class = "text-center"> <button id = "butMin"> - </button> <input style = "width: 40px" value = "0"> <button id = "butPl"> + </button> </p>
+				`
+				
+				MenuBlock.append(set);
+			}
+			
+			let Buts_p = document.querySelectorAll('#butPl');
+			console.log(Buts_p);
+			
+			for (let but of Buts_p){
+				but.addEventListener('click', plus);  //+1 к заказу
+			}
+			
+			let Buts_m = document.querySelectorAll('#butMin');    //Прописать завтра 2 кнопки(2 функции добавить)
+			console.log(Buts_m); 			
+			
+			for (let but of Buts_m){
+				but.addEventListener('click', minus);  //-1 к заказу
+			}
 		}
-	}	
+	}
 }
 
 function findRestaurants(){
@@ -122,6 +181,11 @@ function findRestaurants(){
 	console.log(Places);
 	
 	Places.innerHTML = "";
+	
+	let MenuBlock = document.getElementById('menu');
+	console.log(MenuBlock);
+	
+	MenuBlock.innerHTML = '';
 	
 	for (let i in Res){
 		if (Res[i].admArea == Sel_Area && Res[i].district == Sel_Dist && Res[i].typeObject == Sel_Type && Res[i].socialPrivileges == Sel_Disc){
@@ -151,8 +215,15 @@ function findRestaurants(){
 			Places.append(newDiv);
 		}
 	}
+	
+	let Choose = document.querySelectorAll('#but');
+	
+	for (let butt of Choose){ 
+		butt.addEventListener('click', Chooser);
+	}
 }
 
 getRestaurants()
-getInfo();
 finder.addEventListener('click', findRestaurants);
+
+
