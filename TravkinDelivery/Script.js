@@ -161,8 +161,8 @@ function Chooser(){
 					<p> <img src = "${result[i].url}" width = "100%"> </p>
 					<h5 class = "text-center text-danger"> ${result[i].name} </h5>
 					<p> Краткое описание: ${result[i].description} </p>	
-					<h4 class = "text-center"> ${Prices[i]} Р. </h4>
-					<p class = "text-center"> <button id = "butMin"> - </button> <input style = "width: 40px" value = "0"> <button id = "butPl"> + </button> </p>
+					<h4 class = "text-center"> <span>${Prices[i]}</span> Р. </h4>
+					<p class = "text-center"> <button id = "butMin"> - </button> <input class = "Amount" style = "width: 40px" value = "0"> <button id = "butPl"> + </button> </p>
 				`
 				
 				MenuBlock.append(set);
@@ -187,22 +187,10 @@ function Chooser(){
 function plus(){
 	event.target.parentNode.children[1].value++;
 	
-	
-	let Price = event.target.parentNode.parentNode.children[3].innerText;
+	let Price = event.target.parentNode.parentNode.children[3].children[0].innerText;
 	console.log(Price);
 	
-	var numEl = '';
-
-	for (var index in Price) {
-	  if (Price[index] >= 0 && Price[index] <= 9) {
-		numEl += Price[index];
-	  }
-	}
-	
-	parseInt(numEl);
-	console.log(numEl);
-	
-	AllPrice = Number(AllPrice) + Number(numEl);
+	AllPrice = Number(AllPrice) + Number(Price);
 	console.log(AllPrice);
 	
 	let Total = document.getElementById('Total');
@@ -223,21 +211,10 @@ function minus(){
 	if (event.target.parentNode.children[1].value > 0){
 		event.target.parentNode.children[1].value--;
 		
-		let Price = event.target.parentNode.parentNode.children[3].innerText;
+		let Price = event.target.parentNode.parentNode.children[3].children[0].innerText;
 		console.log(Price);
 		
-		var numEl = '';
-
-		for (var index in Price) {
-		  if (Price[index] >= 0 && Price[index] <= 9) {
-			numEl += Price[index];
-		  }
-		}
-		
-		parseInt(numEl);
-		console.log(numEl);
-		
-		AllPrice = Number(AllPrice) - Number(numEl);
+		AllPrice = Number(AllPrice) - Number(Price);
 		console.log(AllPrice);
 		
 		let Total = document.getElementById('Total');
@@ -297,7 +274,7 @@ function findRestaurants(){
 	Total.innerHTML = '';*/
 	
 	Places.innerHTML = `
-		<div style = "background-color: royalblue; color: white" class = "row border border-primary">
+		<div style = "background-color: royalblue; color: white" class = "row border border-primary ml-3 mr-3">
 			<div class = "col-3">
 				<h5> Название </h5>
 			</div>
@@ -338,7 +315,7 @@ function findRestaurants(){
 			console.log(Res[i]);
 			
 			let newDiv = document.createElement('div');
-			newDiv.className = "row border border-primary";
+			newDiv.className = "row border border-primary ml-3 mr-3";
 			
 			newDiv.innerHTML = `
 				<div class = "col-3 mt-3">
@@ -354,11 +331,11 @@ function findRestaurants(){
 				</div>
 						
 				<div class = "col-3 mt-2">
-					<button id = "but" class = "form-control"> Выбрать </button>
+					<button class = "form-control but"> Выбрать </button>    
 				</div>
 			`
 			
-			Places.append(newDiv);
+			Places.append(newDiv); //Class na ID(334)
 			counter++;
 			
 			if (counter == 20){
@@ -367,14 +344,18 @@ function findRestaurants(){
 		}
 	}
 	
-	let Choose = document.querySelectorAll('#but');
-	
+	let Choose = document.querySelectorAll('.but');
+	//console.log(Choose);
 	for (let butt of Choose){ 
 		butt.addEventListener('click', Chooser);
 	}
 }
 
 function discount(){
+	if (AllPrice == 0){
+		return;
+	}
+	
 	let Student_d = document.getElementById('Student');
 	
 	if (Student_d.checked){
@@ -398,6 +379,10 @@ function discount(){
 }
 
 function fast(){
+	if (AllPrice == 0){
+		return;
+	}
+	
 	let Fast_d = document.getElementById('Fast');  //100 20  120
 	
 	if (Fast_d.checked){
@@ -431,44 +416,35 @@ function addModalWin(){
 	for (let val in inputs){
 		if (inputs[val].value > 0){
 			let newDiv = document.createElement('div');
+			newDiv.className = "row border border-primary mt-2 ml-2 mr-2";
 			
 			let picture = inputs[val].parentNode.parentNode.children[0].children[0].src;
 			let dish_name = inputs[val].parentNode.parentNode.children[1].innerText;
-			let price = inputs[val].parentNode.parentNode.children[3].innerText;
+			let price = inputs[val].parentNode.parentNode.children[3].children[0].innerText;
 			console.log(price);
-			
-			let price_num = '';
-			
-			for (let i in price){
-				if (price[i] >= 0 && price[i] <=9){
-					price_num += price[i];
-				}
-			}
 			
 			let amount = inputs[val].value;
 			
-			let Total = Number(price_num) * Number(amount);
+			let Total = Number(price) * Number(amount);
 			
 			console.log(dish_name);
 			
 			newDiv.innerHTML = `
-			<div class = "row border border-primary mt-2 p-1 ml-2 mr-2">
-				<div class = "col-2">
-					<div> <img src = ${picture} width = "50px" height = "50px" class = "border border-danger"> </div>
+				<div class = "col-2 pl-1">
+					<div class = "mt-2 pl-1 mb-2"> <img src = ${picture} width = "50px" height = "50px" class = "border border-danger"> </div>
 				</div>
 			
 				<div class = "col-3 mt-2">
-					<p> <b> ${dish_name} </b> </p>
+					<p class = "Dish_name mt-2"> <b> ${dish_name} </b> </p>
 				</div>
 			
 				<div class = "col-4 mt-2">
-					<div> ${amount} x ${price} </div>
+					<div class = "Kol mt-3"> ${amount} x ${price} Р. </div>
 				</div>
 				
 				<div class = "col-3">
-					<div> Суммарно: ${Total} Р. </div>
+					<div class = "mt-2 Tot"> Суммарно: ${Total} Р. </div>
 				</div>
-			</div>	
 			`
 			
 			Rest_dishes.append(newDiv);
@@ -485,18 +461,18 @@ function addModalWin(){
 	for (let box of checkboxes){
 		if (box.checked){
 			let newDiv = document.createElement('div');
-			newDiv.className = "row";
+			newDiv.className = "row border-left border-primary ml-2";
 			
 			let opt_name = box.parentNode.parentNode.parentNode.children[0].children[0].innerText;
 			let opt_priv = box.parentNode.parentNode.parentNode.children[0].children[1].innerText;
 		
 			newDiv.innerHTML = `
 				<div class = "col-6">
-					<p class = "text-danger mt-2 ml-5"> ${opt_name} </p>
+					<p class = "mt-2"> ${opt_name}: </p>
 				</div>
 				
 				<div class = "col-6">
-					<p class = "mt-2 ml-2"> ${opt_priv} </p>
+					<p class = "mt-2"> <span class = "Rest"> ${opt_priv} </span> </p>
 				</div>
 			`
 			
@@ -511,26 +487,88 @@ function addModalWin(){
 	
 	let newDiv = document.createElement('div');
 	newDiv.innerHTML = `
-	<div class = "row">
+	<div class = "row border-left border-primary ml-2">
 		<div class = "col-12">
-			<p> Название ресторана: ${Restaurant.name}</p>
+			<p> Название: <span class = "Rest"> ${Restaurant.name} </span> </p>
 		</div>
 		
 		<div class = "col-12">
-			<p> Административный округ: ${Restaurant.admArea}</p>
+			<p> Адм. Округ: <span class = "Rest"> ${Restaurant.admArea} </span> </p>
 		</div>
 		
 		<div class = "col-12">
-			<p> Район : ${Restaurant.district}</p>
+			<p> Район : <span class = "Rest"> ${Restaurant.district} </span> </p>
 		</div>
 		
 		<div class = "col-12">
-			<p> Адрес ресторана: ${Restaurant.address}</p>
+			<p> Адрес: <span class = "Rest"> ${Restaurant.address} </span> </p>
+		</div>
+		
+		<div class = "col-12">
+			<p> Рейтинг: <span class = "Rest"> ${Restaurant.rate} </span> </p>
 		</div>
 	</div>	
 	`
 	
 	Rest_info.append(newDiv);
+	
+	let Dostavka = document.getElementById('Dostavka');
+	console.log(Dostavka);
+	
+	let newDost = document.createElement('div');
+	newDost.innerHTML = `
+	<div class = "row border-left border-primary ml-2">
+		<div class = "col-6">
+			<p> Зона доставки </p>
+		</div>
+		
+		<div class = "col-6">
+			<p> 
+				<select>
+					<option> Не выбрано </option>
+					<option> Первая зона </option>
+					<option> Вторая зона </option>
+					<option> Третья зона </option>
+				</select>
+			</p>
+		</div>
+		
+		<div class = "col-6">
+			<p> Адрес доставки </p>
+		</div>
+		
+		<div class = "col-6">
+			<textarea> </textarea>
+		</div>
+		
+		<div class = "col-6">
+			<p>Стоимость доставки</p>
+		</div>
+		
+		<div class = "col-6 mt-2">
+			<p class = "Rest"> <span> 250 </span> Р. </p>
+		</div>
+		
+		<div class = "col-6 mt-2">
+			<p>ФИО получателя</p>
+		</div>
+		
+		<div class = "col-6">
+			<textarea> </textarea>
+		</div>
+		
+		<div class = "col-6 mt-2">
+			<p>Итого</p>
+		</div>
+		
+		<div class = "col-6 mt-2">
+			<p class = "Money text-danger"> ${AllPrice+250} Р. </p>
+		</div>
+	</div>	
+	`
+	
+	Dostavka.append(newDost);
+	
 }
 
 function SortByA(result){
@@ -545,6 +583,26 @@ function SortByA(result){
 	}
 }
 
+function Checker(){
+	let values = document.querySelectorAll('.Amount');
+	for (let key in values){
+		if (values[key].value > 0){
+			return;
+		}
+	}
+	
+	AllPrice = 0;
+	
+	let Total = document.getElementById('Total');
+	Total.innerHTML = '';	
+	let newH2 = document.createElement('H2');
+	newH2.innerHTML = `
+	Итого: ${AllPrice} Рубля(лей)
+	`
+	Total.append(newH2);
+}
+
+setInterval(Checker, 250);
 getRestaurants()
 finder.addEventListener('click', findRestaurants);
 Student_d.addEventListener('click', discount);

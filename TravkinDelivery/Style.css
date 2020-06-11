@@ -6,7 +6,7 @@
 	background-color: silver;
 }
 
-#but:hover{
+.but:hover{
 	color: white;
 	background-color: blue;
 }
@@ -35,4 +35,28 @@ body{
 
 .container{
 	background-image: url(BG2.jpg);
+}
+
+.Rest{
+	font-size: 15px;
+	color: grey;
+}
+
+.Dish_name{
+	font-size: 13px;
+	color: text-danger;
+}
+
+.Kol{
+	font-size: 12px;
+	color: grey;
+}
+
+.Tot{
+	Color: red;
+	font-size: 13px;
+}
+
+.Money{
+	font-size: 20px;
 }
