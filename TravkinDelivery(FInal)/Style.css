@@ -1,0 +1,75 @@
+.row .col-sm-4{
+	border: 1px solid blue;
+}
+
+.row .col-sm-4:hover{
+	background-color: silver;
+}
+
+.but:hover{
+	color: white;
+	background-color: blue;
+}
+
+.but_choose:hover{
+	color: white;
+	background-color: blue;
+}
+
+#finder:hover{
+	color: white;
+	background-color: blue;
+}
+
+body{
+	background-image: url(BG.jpg);
+}
+
+#amount{
+	width: 35px;
+}
+
+.footer{
+	background-color: white;
+}
+
+#Dishes{
+	max-height: 360px;
+	overflow-x: auto;
+}
+
+.container{
+	background-image: url(BG2.jpg);
+}
+
+.Rest{
+	font-size: 15px;
+	color: grey;
+}
+
+.Dish_name{
+	font-size: 13px;
+	color: text-danger;
+}
+
+.Kol{
+	font-size: 12px;
+	color: grey;
+}
+
+.Tot{
+	Color: red;
+	font-size: 15px;
+}
+
+.Money{
+	font-size: 20px;
+}
+
+.opinion{
+	height: 100px;
+}
+
+.MenuName{
+	height: 50px;
+}

@@ -1,0 +1,52 @@
+[
+	{
+	   "name":"Буйабес(суп из рыбы)",
+	   "description":"Вкусный и недорогой суп",
+	   "url":"Food/sup.jpg"
+	},
+	{
+	   "name":"Картошка фри",
+	   "description":"Всеми любимый картофель фри",
+	   "url":"Food/Pot_free.jpg"
+	},
+	{
+	   "name":"Стейк мраморной говядины",
+	   "description":"Мраморная говядина средней прожарки",
+	   "url":"Food/Mram_gov.jpg"
+	},
+	{
+	   "name":"Биг Пицца 4 сыра",
+	   "description":"Вкусная и сытная пицца",
+	   "url":"Food/Pizza4.jpg"
+	},
+	{
+	   "name":"Торт Павлова",
+	   "description":"Изысканный десерт",
+	   "url":"Food/Tort.jpg"
+	},
+	{
+	   "name":"Сёмга под соусом",
+	   "description":"Сёмга грилль, спаржа, бешамель",
+	   "url":"Food/Semga.jpg"
+	},
+	{
+	   "name":"Салат Цезарь",
+	   "description":"Диетический салат",
+	   "url":"Food/Cesar.jpg"
+	},
+	{
+	   "name":"Комплексный обед",
+	   "description":"Обед включает блюда: 1, 2, 3, десерт и напиток",
+	   "url":"Food/Complex.jpg"
+	},
+	{
+	   "name":"Шашлык с овощами",
+	   "description":"Мясо: баранина, свинина и говядина, овощи",
+	   "url":"Food/Shash.jpg"
+	},
+	{
+	   "name":"Роллы",
+	   "description":"Классическая японская кухня",
+	   "url":"Food/Rolls.jpg"
+	}
+]
