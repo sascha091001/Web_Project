@@ -1,4 +1,4 @@
-.row .col-sm-4{
+.row .col-xl-4, .col-sm-4{
 	border: 1px solid blue;
 }
 
@@ -7,6 +7,11 @@
 }
 
 .but:hover{
+	color: white;
+	background-color: blue;
+}
+
+.but_choose:hover{
 	color: white;
 	background-color: blue;
 }
@@ -54,9 +59,22 @@ body{
 
 .Tot{
 	Color: red;
-	font-size: 13px;
+	font-size: 15px;
 }
 
 .Money{
 	font-size: 20px;
+}
+
+.opinion{
+	min-height: 100px;
+}
+
+.MenuName{
+	min-height: 50px;
+}
+
+#next, #prev{
+	width: 100px;
+	display: inline-block;
 }
